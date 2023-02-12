@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DataserviceService } from './dataservice.service';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  oddNumber:number[] = [];
+  evenNumber:number[] = [];
+  storeddata:any;
+  constructor(private dataservice:DataserviceService){}
+  // ngOnInit(){
+  //   this.dataservice.data.subscribe(data =>{
+  //     this.storeddata = data;
+  //     console.log("jkkjkjkjjjkj",this.storeddata);
+  //   })
+  // }
   serverElements = [{type:'server',name:'grhherer',content:'efewgew'}];
 
   onServerAdded(serverData:{serverName:string,serverContent:string}) {
@@ -24,4 +35,20 @@ export class AppComponent {
     });
   }
   
+  onChangeFirst(){
+    this.serverElements[0].name = 'Change';
+  }
+
+  OnStartbuttonclick(event){
+    console.log("lllll",event);
+    this.dataservice.updateData(event);
+    console.log("hhhhhhhh",this.dataservice.updateData(event));
+    if(event % 2 == 0){
+      this.evenNumber.push(event);
+    }
+    else{
+      this.oddNumber.push(event)
+    }
+    
+  }
 }

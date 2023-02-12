@@ -6,10 +6,29 @@
   <hr />
   <div class="row">
     <div class="col-xs-12">
+      <button class="btn btn-primary" (click)="onChangeFirst()">
+        Change First Element
+      </button>
       <app-server-element
         *ngFor="let serverElement of serverElements"
         [srvElement]="serverElement"
-      ></app-server-element>
+        [name]="serverElement.name"
+      >
+        <p #contentPara>
+          <strong *ngIf="serverElement.type === 'server'" style="color: red">
+            {{ serverElement.content }}</strong
+          >
+          <em *ngIf="serverElement.type === 'blueprint'">{{
+            serverElement.content
+          }}</em>
+        </p>
+      </app-server-element>
     </div>
   </div>
 </div>
+
+<app-game-control (incrementvalue)="OnStartbuttonclick($event)">
+</app-game-control>
+
+<app-odd *ngFor="let oddnum of oddNumber" [number]="oddnum"></app-odd>
+<app-even *ngFor="let evennum of evenNumber" [number]="evennum"></app-even>
